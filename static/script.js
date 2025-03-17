@@ -18,17 +18,28 @@ function shoot(x, y) {
             cell.innerText = "X";
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
+            updateScore("hits");
         } else if (data.status === "miss") {
             cell.innerText = "O";
             cell.classList.add("miss");
             updateGameStatus("💦 Miss! Try again.");
         } else if (data.status === "duplicate") {
             alert("You already fired here!");
+            return;
         } else if (data.status === "win") {
             updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
             revealShips();
         }
+
+        // Always update attempts
+        updateScore("attempts");
     });
+}
+
+// Function to update Hits and Attempts dynamically
+function updateScore(type) {
+    let scoreElement = document.getElementById(type);
+    scoreElement.innerText = parseInt(scoreElement.innerText) + 1;
 }
 
 // Update Game Status Message
