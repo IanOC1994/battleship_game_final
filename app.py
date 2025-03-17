@@ -3,6 +3,7 @@ from flask import Flask, render_template
 import random
 
 app = Flask(__name__)
+app.secret_key = "supersecretkey"
 
 GRID_SIZE = 5
 
@@ -23,10 +24,11 @@ def place_ships():
     return grid
 
 
-@app.route('/')
+@app.route("/")
 def index():
-    grid = place_ships()
-    return render_template('index.html', grid=grid)
+    if "game_state" not in session:
+        session["game_state"] = "Initialized"
+    return session["game_state"]
 
 
 if __name__ == '__main__':
