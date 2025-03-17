@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Battleship</title>
+    <title>Battleship Game</title>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="static/script.js"></script>
 </head>
-
 <body>
-    <h1>Battleship</h1>
-    <table>
-        {% for row in board %}
-            <tr>
-                {% for cell in row %}
-                    <td>{{ cell }}</td>
-                {% endfor %}
-            </tr>
+
+<h1>Battleship Game</h1>
+<p>Attempts: {{ attempts }} | Hits: {{ hits }}</p>
+
+<table class="grid">
+    {% for x in range(grid|length) %}
+    <tr>
+        {% for y in range(grid[x]|length) %}
+        <td id="cell-{{ x }}-{{ y }}" class="cell" onclick="shoot('{{ x }}', '{{ y }}')">{{ grid[x][y] }}</td>
         {% endfor %}
-    </table>
+    </tr>
+    {% endfor %}
+</table>
+
 </body>
 </html>

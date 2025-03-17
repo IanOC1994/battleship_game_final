@@ -11,14 +11,17 @@ def create_grid():
     return [[' ' for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
 
 
-def create_grid():
+def place_ships():
+    grid = create_grid()
     ships = 0
     while ships < GRID_SIZE // 2:
-        x, y = random.randint(0, GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1)
+        x = random.randint(0, GRID_SIZE - 1)
+        y = random.randint(0, GRID_SIZE - 1)
         if grid[x][y] == '~':
             grid[x][y] = 'S'
             ships += 1
     return grid
+
 
 @app.route('/')
 def index():
