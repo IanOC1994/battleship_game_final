@@ -1,6 +1,7 @@
 function shoot(x, y) {
     let cell = document.getElementById(`cell-${x}-${y}`);
 
+    // Prevent clicking the same cell twice
     if (cell.classList.contains("hit") || cell.classList.contains("miss")) {
         alert("You've already shot here!");
         return;
@@ -16,17 +17,27 @@ function shoot(x, y) {
         if (data.status === "hit") {
             cell.innerText = "X";
             cell.classList.add("hit");
+            updateGameStatus("🔥 Hit! Keep going!");
         } else if (data.status === "miss") {
             cell.innerText = "O";
             cell.classList.add("miss");
+            updateGameStatus("💦 Miss! Try again.");
+        } else if (data.status === "duplicate") {
+            alert("You already fired here!");
         } else if (data.status === "win") {
-            alert(`You won in ${data.attempts} attempts!`);
-            showShips();
+            updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
+            revealShips();
         }
     });
 }
 
-function showShips() {
+// Update Game Status Message
+function updateGameStatus(message) {
+    document.getElementById("game-status").innerText = message;
+}
+
+// Reveal Ships When Game Ends
+function revealShips() {
     fetch("/reveal-ships")
     .then(response => response.json())
     .then(data => {
@@ -38,6 +49,7 @@ function showShips() {
     });
 }
 
+// Restart Game Function
 function restartGame() {
     fetch("/restart")
     .then(() => location.reload());
