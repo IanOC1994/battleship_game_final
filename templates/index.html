@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battleship Game</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="static/script.js"></script>
 </head>
 <body>
 
-<h1>Battleship Game</h1>
-<p>Attempts: {{ attempts }} | Hits: {{ hits }}</p>
+<h1>🚢 Battleship Game 🎯</h1>
+<p>Attempts: <span id="attempts">{{ attempts }}</span> | Hits: <span id="hits">{{ hits }}</span></p>
 
+<!-- Game Status Message -->
+<div id="game-status">Click on a cell to fire!</div>
+
+<!-- Game Grid -->
 <table class="grid">
     {% for x in range(grid|length) %}
     <tr>
@@ -21,7 +26,8 @@
     {% endfor %}
 </table>
 
-<button onclick="restartGame()">Restart Game</button>
+<!-- Restart Button -->
+<button onclick="restartGame()">🔄 Restart Game</button>
 
 </body>
 </html>
