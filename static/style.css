@@ -1,46 +1,29 @@
-/* General Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #1e1e2e;
-    color: #ffffff;
-    text-align: center;
-    padding: 20px;
-}
-
-h1 {
-    font-size: 32px;
-    color: #ffcc00;
-    margin-bottom: 10px;
-}
-
-p {
-    font-size: 18px;
-}
-
-/* Game Grid Styling */
+/* Game Grid */
 .grid {
     display: inline-block;
     border-spacing: 5px;
-    background-color: #333;
+    background-color: #444;
     padding: 10px;
     border-radius: 10px;
 }
 
+/* Grid Cell Styling */
 .cell {
     width: 50px;
     height: 50px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    border: 2px solid #555;
-    background-color: #444;
+    text-align: center;
+    border: 2px solid #ddd;
+    background-color: #666;
     color: white;
-    transition: background 0.3s, transform 0.1s;
+    transition: all 0.3s;
 }
 
 /* Hover Effect */
 .cell:hover {
-    background-color: #777;
+    background-color: #aaa;
     transform: scale(1.1);
 }
 
@@ -62,29 +45,9 @@ p {
     100% { transform: scale(1); }
 }
 
-/* Restart Button */
-button {
-    background-color: #ffcc00;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background 0.3s;
-}
-
-button:hover {
-    background-color: #ffaa00;
-}
-
 /* Game Status Message */
 #game-status {
     font-size: 20px;
-    margin-top: 15px;
     padding: 10px;
-    background-color: #222;
     border-radius: 10px;
-    display: inline-block;
 }

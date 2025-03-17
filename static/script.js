@@ -19,6 +19,7 @@ function shoot(x, y) {
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
             updateScore("hits");
+            updateProgressBar();
         } else if (data.status === "miss") {
             cell.innerText = "O";
             cell.classList.add("miss");
@@ -40,6 +41,14 @@ function shoot(x, y) {
 function updateScore(type) {
     let scoreElement = document.getElementById(type);
     scoreElement.innerText = parseInt(scoreElement.innerText) + 1;
+}
+
+// Update Progress Bar
+function updateProgressBar() {
+    let hits = parseInt(document.getElementById("hits").innerText);
+    let maxHits = parseInt(document.getElementById("hit-progress").ariaValueMax);
+    let progressPercentage = (hits / maxHits) * 100;
+    document.getElementById("hit-progress").style.width = progressPercentage + "%";
 }
 
 // Update Game Status Message
