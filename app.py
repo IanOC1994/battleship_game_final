@@ -1,21 +1,22 @@
 # Import the Flask class from the flask module
-from flask import Flask, render_template, session
+from flask import Flask, render_template, request, session, jsonify
 import random
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"
+app.secret_key = "supersecretkey"  # Required for session storage
 
 GRID_SIZE = 5
+NUM_SHIPS = GRID_SIZE // 2
 
 
 def create_grid():
-    return [[' ' for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
+    return [['~' for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
 
 
 def place_ships():
     grid = create_grid()
     ships = 0
-    while ships < GRID_SIZE // 2:
+    while ships < NUM_SHIPS:
         x = random.randint(0, GRID_SIZE - 1)
         y = random.randint(0, GRID_SIZE - 1)
         if grid[x][y] == '~':
@@ -28,8 +29,49 @@ def place_ships():
 def index():
     if "game_state" not in session:
         session["game_state"] = create_grid()
-    return render_template("index.html", grid=session["game_state"])
+        session["computer_grid"] = place_ships()
+        session["hits"] = 0
+        session["attempts"] = 0
+    return render_template(
+        "index.html",
+        grid=session["game_state"],
+        hits=session["hits"],
+        attempts=session["attempts"]
+    )
 
 
-if __name__ == '__main__':
+@app.route("/shoot", methods=["POST"])
+def shoot():
+    x, y = int(request.form["x"]), int(request.form["y"])
+
+    if session["game_state"][x][y] != '~':  # Prevent duplicate shots
+        return jsonify({"status": "duplicate"})
+    session["attempts"] += 1
+
+    if session["computer_grid"][x][y] == 'S':
+        session["game_state"][x][y] = 'X'
+        session["hits"] += 1
+    else:
+        session["game_state"][x][y] = 'O'
+
+    session.modified = True
+
+    if session["hits"] == NUM_SHIPS:
+        return jsonify({"status": "win", "attempts": session["attempts"]})
+    return jsonify({
+        "status": "hit" if session['game_state'][x][y] == 'X' else "miss"
+    })
+
+
+@app.route("/reveal-ships")
+def reveal_ships():
+    ships = []
+    for x in range(GRID_SIZE):
+        for y in range(GRID_SIZE):
+            if session["computer_grid"][x][y] == "S":
+                ships.append((x, y))
+    return jsonify({"ships": ships})
+
+
+if __name__ == "__main__":
     app.run(debug=True)
