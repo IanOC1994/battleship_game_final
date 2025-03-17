@@ -37,3 +37,8 @@ function showShips() {
         });
     });
 }
+
+function restartGame() {
+    fetch("/restart")
+    .then(() => location.reload());
+}

@@ -73,5 +73,11 @@ def reveal_ships():
     return jsonify({"ships": ships})
 
 
+@app.route("/restart")
+def restart():
+    session.clear()  # Reset game state
+    return "", 204
+
+
 if __name__ == "__main__":
     app.run(debug=True)
