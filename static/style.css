@@ -1,38 +1,90 @@
+/* General Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #1e1e2e;
+    color: #ffffff;
     text-align: center;
+    padding: 20px;
 }
 
 h1 {
-    color: #333;
+    font-size: 32px;
+    color: #ffcc00;
+    margin-bottom: 10px;
 }
 
+p {
+    font-size: 18px;
+}
+
+/* Game Grid Styling */
 .grid {
     display: inline-block;
     border-spacing: 5px;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .cell {
     width: 50px;
     height: 50px;
-    text-align: center;
     font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
-    border: 1px solid black;
-    background-color: lightgray;
-    transition: background-color 0.3s;
+    border: 2px solid #555;
+    background-color: #444;
+    color: white;
+    transition: background 0.3s, transform 0.1s;
 }
 
+/* Hover Effect */
 .cell:hover {
-    background-color: #ddd;
+    background-color: #777;
+    transform: scale(1.1);
 }
 
+/* Hit & Miss Styling */
 .hit {
     background-color: red !important;
     color: white;
+    animation: pop 0.3s;
 }
 
 .miss {
     background-color: blue !important;
     color: white;
+}
+
+/* Animation for hits */
+@keyframes pop {
+    0% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Restart Button */
+button {
+    background-color: #ffcc00;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #ffaa00;
+}
+
+/* Game Status Message */
+#game-status {
+    font-size: 20px;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #222;
+    border-radius: 10px;
+    display: inline-block;
 }
