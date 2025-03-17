@@ -1,5 +1,5 @@
 # Import the Flask class from the flask module
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 import random
 
 app = Flask(__name__)
@@ -27,8 +27,8 @@ def place_ships():
 @app.route("/")
 def index():
     if "game_state" not in session:
-        session["game_state"] = "Initialized"
-    return session["game_state"]
+        session["game_state"] = create_grid()
+    return render_template("index.html", grid=session["game_state"])
 
 
 if __name__ == '__main__':
