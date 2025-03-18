@@ -16,29 +16,27 @@ function shoot(x, y) {
     .then(data => {
         console.log("Server Response:", data);  // ✅ Debugging
 
-        if (data.status === "hit") {
+        if (data.hits !== undefined) {
+            console.log(`Updating hits: ${data.hits}`);  // ✅ Check if value is correct
+        }
+
+        if (data.status === "hit" || data.status === "win") {
             cell.innerText = "X";
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
             updateScore("hits", data.hits);  // ✅ Ensure hits update
             updateProgressBar(data.hits, data.total_ships);
+        }
 
-            if (data.hits == data.total_ships) {
-                updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
-                revealShips();
-            }
+        if (data.status === "win") {
+            updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
+            revealShips();
+        }
 
-        } else if (data.status === "miss") {
+        if (data.status === "miss") {
             cell.innerText = "O";
             cell.classList.add("miss");
             updateGameStatus("💦 Miss! Try again.");
-        } else if (data.status === "duplicate") {
-            alert("You already fired here!");
-            return;
-        } else if (data.status === "win") {
-            updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
-            revealShips();
-            updateProgressBar(data.hits, data.total_ships);
         }
 
         updateScore("attempts", data.attempts);
@@ -49,7 +47,14 @@ function shoot(x, y) {
 function updateScore(type, value) {
     let element = document.getElementById(type);
     if (element) {
+        console.log(`Updating ${type}: ${value}`);  // ✅ Debugging
         element.innerText = value;
+
+        // ✅ Force UI refresh (fix for some browsers)
+        element.style.color = "red";
+        setTimeout(() => {
+            element.style.color = "";
+        }, 100);
     }
 }
 
