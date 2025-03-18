@@ -72,18 +72,10 @@ def shoot():
 
     session.modified = True
 
-    # Check if the number of hits equals the number of ships
     total_ships = sum(row.count("S") for row in session["computer_grid"])
-    if session["hits"] == total_ships:
-        return jsonify({
-            "status": "win",
-            "attempts": session["attempts"],
-            "hits": session["hits"],
-            "total_ships": total_ships
-        })
-
+    # Always return updated `hits` and `total_ships`
     return jsonify({
-        "status": status,
+        "status": "win" if session["hits"] == total_ships else status,
         "attempts": session["attempts"],
         "hits": session["hits"],
         "total_ships": total_ships

@@ -19,9 +19,8 @@ function shoot(x, y) {
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
             updateScore("hits", data.hits);
-            updateProgressBar(data.hits, data.total_ships);
+            updateProgressBar(data.hits, data.total_ships);  // ✅ Ensure progress bar updates
 
-            // ✅ If hits == total_ships, game should end
             if (data.hits == data.total_ships) {
                 updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
                 revealShips();
@@ -37,9 +36,9 @@ function shoot(x, y) {
         } else if (data.status === "win") {
             updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
             revealShips();
+            updateProgressBar(data.hits, data.total_ships);
         }
 
-        // Always update attempts
         updateScore("attempts", data.attempts);
     });
 }
@@ -52,10 +51,11 @@ function updateScore(type, value) {
 
 // Update Progress Bar
 function updateProgressBar(hits, totalShips) {
-    // Prevent progress bar from going above 100%
-    let progressPercentage = Math.min((hits / totalShips) * 100, 100);
+    if (totalShips === 0) return;  // Prevent division by zero
 
-    // ✅ Update progress bar width
+    let progressPercentage = (hits / totalShips) * 100;
+    progressPercentage = Math.min(progressPercentage, 100);  // Ensure it doesn't exceed 100%
+
     let progressBar = document.getElementById("hit-progress");
     progressBar.style.width = progressPercentage + "%";
     progressBar.setAttribute("aria-valuenow", hits);
