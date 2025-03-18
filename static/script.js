@@ -14,11 +14,13 @@ function shoot(x, y) {
     })
     .then(response => response.json())
     .then(data => {
+        console.log("Server Response:", data);  // ✅ Debugging
+
         if (data.status === "hit") {
             cell.innerText = "X";
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
-            updateScore("hits", data.hits);  // ✅ Make sure hit count updates
+            updateScore("hits", data.hits);  // ✅ Ensure hits update
             updateProgressBar(data.hits, data.total_ships);
 
             if (data.hits == data.total_ships) {

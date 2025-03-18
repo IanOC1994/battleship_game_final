@@ -64,20 +64,18 @@ def shoot():
     if session["computer_grid"][x][y] == 'S':
         session["game_state"][x][y] = 'X'
         session["hits"] += 1
+        session.modified = True  # ✅ Ensure session updates!
         status = "hit"
     else:
         session["game_state"][x][y] = 'O'
         status = "miss"
 
-    session.modified = True
-
     total_ships = sum(row.count("S") for row in session["computer_grid"])
 
-    # Always return updated `hits` and `total_ships`
     return jsonify({
         "status": "win" if session["hits"] == total_ships else status,
         "attempts": session["attempts"],
-        "hits": session["hits"],
+        "hits": session["hits"],  # ✅ Make sure Flask returns correct hit count
         "total_ships": total_ships
     })
 
