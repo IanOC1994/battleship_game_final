@@ -19,7 +19,8 @@ function shoot(x, y) {
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
             updateScore("hits");
-            updateProgressBar();
+            updateProgressBar();  // ✅ Ensure the progress bar updates
+
         } else if (data.status === "miss") {
             cell.innerText = "O";
             cell.classList.add("miss");
