@@ -1,6 +1,7 @@
 # Import the Flask class from the flask module
 from flask import Flask, render_template, request, session, jsonify
 import random
+import os
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"  # Required for session storage
@@ -80,4 +81,10 @@ def restart():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    if os.name == "nt":  # If running on Windows
+        from waitress import serve
+        print("Running with Waitress on Windows...")
+        serve(app, host="0.0.0.0", port=5000)
+    else:  # If running on Linux/Mac (e.g., in a server)
+        print("Running with Flask's built-in server...")
+        app.run(debug=False)
