@@ -33,11 +33,15 @@ def index():
         session["computer_grid"] = place_ships()
         session["hits"] = 0
         session["attempts"] = 0
+
+    # Ensure we send the correct number of ships
+    total_ships = sum(row.count("S") for row in session["computer_grid"])
     return render_template(
         "index.html",
         grid=session["game_state"],
         hits=session["hits"],
-        attempts=session["attempts"]
+        attempts=session["attempts"],
+        total_ships=total_ships
     )
 
 
