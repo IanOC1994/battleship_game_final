@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Game Stats</h5>
                         <p>Attempts: <span id="attempts" class="fw-bold">{{ attempts }}</span></p>
-                        <p>Hits: <span id="hits" class="fw-bold">{{ hits }}</span> / {{ grid|length // 2 }}</p>
+                        <p>Hits: <span id="hits" class="fw-bold">{{ hits }}</span> / <span id="total-ships">{{ total_ships }}</span></p>
                         
                         <!-- Progress Bar for Hits -->
                         <div class="progress">

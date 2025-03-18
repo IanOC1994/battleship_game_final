@@ -51,13 +51,12 @@ def shoot():
     x, y = int(request.form["x"]), int(request.form["y"])
 
     if session["game_state"][x][y] != '~':
+        total_ships = sum(row.count("S") for row in session["computer_grid"])
         return jsonify({
             "status": "duplicate",
             "attempts": session["attempts"],
             "hits": session["hits"],
-            "total_ships": sum(
-                row.count("S") for row in session["computer_grid"]
-            )
+            "total_ships": total_ships
         })
 
     session["attempts"] += 1
@@ -73,6 +72,7 @@ def shoot():
     session.modified = True
 
     total_ships = sum(row.count("S") for row in session["computer_grid"])
+
     # Always return updated `hits` and `total_ships`
     return jsonify({
         "status": "win" if session["hits"] == total_ships else status,
