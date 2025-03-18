@@ -49,22 +49,37 @@ def index():
 def shoot():
     x, y = int(request.form["x"]), int(request.form["y"])
 
-    if session["game_state"][x][y] != '~':  # Prevent duplicate shots
-        return jsonify({"status": "duplicate"})
+    if session["game_state"][x][y] != '~':
+        return jsonify({
+            "status": "duplicate",
+            "attempts": session["attempts"],
+            "hits": session["hits"]
+        })
+
     session["attempts"] += 1
 
     if session["computer_grid"][x][y] == 'S':
         session["game_state"][x][y] = 'X'
         session["hits"] += 1
+        status = "hit"
     else:
         session["game_state"][x][y] = 'O'
+        status = "miss"
 
     session.modified = True
 
-    if session["hits"] == NUM_SHIPS:
-        return jsonify({"status": "win", "attempts": session["attempts"]})
+    total_ships = sum(row.count("S") for row in session["computer_grid"])
+    if session["hits"] == total_ships:
+        return jsonify({
+            "status": "win",
+            "attempts": session["attempts"],
+            "hits": session["hits"]
+        })
+
     return jsonify({
-        "status": "hit" if session['game_state'][x][y] == 'X' else "miss"
+        "status": status,
+        "attempts": session["attempts"],
+        "hits": session["hits"]
     })
 
 
