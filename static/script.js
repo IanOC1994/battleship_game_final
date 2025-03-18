@@ -18,8 +18,8 @@ function shoot(x, y) {
             cell.innerText = "X";
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
-            updateScore("hits", data.hits);  // ✅ Update hit counter
-            updateProgressBar(data.hits, data.total_ships);  // ✅ Update progress bar
+            updateScore("hits", data.hits);  // ✅ Make sure hit count updates
+            updateProgressBar(data.hits, data.total_ships);
 
             if (data.hits == data.total_ships) {
                 updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
@@ -45,7 +45,10 @@ function shoot(x, y) {
 
 // Function to update Hits and Attempts dynamically
 function updateScore(type, value) {
-    document.getElementById(type).innerText = value;
+    let element = document.getElementById(type);
+    if (element) {
+        element.innerText = value;
+    }
 }
 
 // Update Progress Bar
