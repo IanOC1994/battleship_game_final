@@ -19,7 +19,7 @@ function shoot(x, y) {
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
             updateScore("hits");
-            updateProgressBar();  // ✅ Ensure the progress bar updates
+            updateProgressBar();  // ✅ Ensure progress bar updates
 
         } else if (data.status === "miss") {
             cell.innerText = "O";
@@ -31,6 +31,7 @@ function shoot(x, y) {
         } else if (data.status === "win") {
             updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
             revealShips();
+            updateProgressBar(); // Ensure final hit updates progress
         }
 
         // Always update attempts
@@ -49,10 +50,13 @@ function updateProgressBar() {
     let hits = parseInt(document.getElementById("hits").innerText);
     let maxHits = parseInt(document.getElementById("hit-progress").getAttribute("aria-valuemax"));
 
-    // Ensure progress calculation is right
+    // Ensure progress calculation is correct
     let progressPercentage = (hits / maxHits) * 100;
-    document.getElementById("hit-progress").style.width = progressPercentage + "%";
-    document.getElementById("hit-progress").setAttribute("aria-valuenow", hits);
+    
+    // Update the progress bar width and label
+    let progressBar = document.getElementById("hit-progress");
+    progressBar.style.width = progressPercentage + "%";
+    progressBar.setAttribute("aria-valuenow", hits);
 }
 
 // Update Game Status Message
