@@ -18,8 +18,8 @@ function shoot(x, y) {
             cell.innerText = "X";
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
-            updateScore("hits");
-            updateProgressBar();  // ✅ Ensure the progress bar updates
+            updateScore("hits", data.hits);
+            updateProgressBar(data.hits, data.total_ships);  // ✅ Ensure progress bar updates
 
         } else if (data.status === "miss") {
             cell.innerText = "O";
@@ -31,29 +31,26 @@ function shoot(x, y) {
         } else if (data.status === "win") {
             updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
             revealShips();
-            updateProgressBar();  // ✅ Ensure final hit updates progress
+            updateProgressBar(data.hits, data.total_ships);  // ✅ Ensure final hit updates progress
         }
 
         // Always update attempts
-        updateScore("attempts");
+        updateScore("attempts", data.attempts);
     });
 }
 
 // Function to update Hits and Attempts dynamically
-function updateScore(type) {
+function updateScore(type, value) {
     let scoreElement = document.getElementById(type);
-    scoreElement.innerText = parseInt(scoreElement.innerText) + 1;
+    scoreElement.innerText = value;
 }
 
 // Update Progress Bar
-function updateProgressBar() {
-    let hits = parseInt(document.getElementById("hits").innerText);
-    let maxHits = parseInt(document.getElementById("hit-progress").getAttribute("aria-valuemax"));
+function updateProgressBar(hits, totalShips) {
+    // Prevent progress bar from going above 100%
+    let progressPercentage = Math.min((hits / totalShips) * 100, 100);
 
-    // Ensure progress calculation is correct
-    let progressPercentage = Math.min((hits / maxHits) * 100, 100);
-    
-    // Update the progress bar width and label
+    // ✅ Update progress bar width
     let progressBar = document.getElementById("hit-progress");
     progressBar.style.width = progressPercentage + "%";
     progressBar.setAttribute("aria-valuenow", hits);

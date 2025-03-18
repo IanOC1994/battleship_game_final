@@ -34,8 +34,9 @@ def index():
         session["hits"] = 0
         session["attempts"] = 0
 
-    # Ensure we send the correct number of ships
+    # Make sure total ships is correctly calculated
     total_ships = sum(row.count("S") for row in session["computer_grid"])
+
     return render_template(
         "index.html",
         grid=session["game_state"],
@@ -53,7 +54,10 @@ def shoot():
         return jsonify({
             "status": "duplicate",
             "attempts": session["attempts"],
-            "hits": session["hits"]
+            "hits": session["hits"],
+            "total_ships": sum(
+                row.count("S") for row in session["computer_grid"]
+            )
         })
 
     session["attempts"] += 1
@@ -68,18 +72,12 @@ def shoot():
 
     session.modified = True
 
-    total_ships = sum(row.count("S") for row in session["computer_grid"])
-    if session["hits"] == total_ships:
-        return jsonify({
-            "status": "win",
-            "attempts": session["attempts"],
-            "hits": session["hits"]
-        })
-
+    # Always return the correct number of ships & hits
     return jsonify({
         "status": status,
         "attempts": session["attempts"],
-        "hits": session["hits"]
+        "hits": session["hits"],
+        "total_ships": sum(row.count("S") for row in session["computer_grid"])
     })
 
 
