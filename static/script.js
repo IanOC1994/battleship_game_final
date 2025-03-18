@@ -47,9 +47,12 @@ function updateScore(type) {
 // Update Progress Bar
 function updateProgressBar() {
     let hits = parseInt(document.getElementById("hits").innerText);
-    let maxHits = parseInt(document.getElementById("hit-progress").ariaValueMax);
+    let maxHits = parseInt(document.getElementById("hit-progress").getAttribute("aria-valuemax"));
+
+    // Ensure progress calculation is right
     let progressPercentage = (hits / maxHits) * 100;
     document.getElementById("hit-progress").style.width = progressPercentage + "%";
+    document.getElementById("hit-progress").setAttribute("aria-valuenow", hits);
 }
 
 // Update Game Status Message
