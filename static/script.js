@@ -19,7 +19,13 @@ function shoot(x, y) {
             cell.classList.add("hit");
             updateGameStatus("🔥 Hit! Keep going!");
             updateScore("hits", data.hits);
-            updateProgressBar(data.hits, data.total_ships);  // ✅ Ensure progress bar updates
+            updateProgressBar(data.hits, data.total_ships);
+
+            // ✅ If hits == total_ships, game should end
+            if (data.hits == data.total_ships) {
+                updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
+                revealShips();
+            }
 
         } else if (data.status === "miss") {
             cell.innerText = "O";
@@ -31,7 +37,6 @@ function shoot(x, y) {
         } else if (data.status === "win") {
             updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
             revealShips();
-            updateProgressBar(data.hits, data.total_ships);  // ✅ Ensure final hit updates progress
         }
 
         // Always update attempts
