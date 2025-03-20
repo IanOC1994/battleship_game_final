@@ -20,10 +20,18 @@
         <div id="game-status" class="alert alert-info">Click on a cell to fire!</div>
 
         <!-- Scoreboard -->
-    <div class="scoreboard mt-3">
-        <p><strong>Attempts:</strong> <span id="attempts">{{ attempts }}</span></p>
-        <p><strong>Hits:</strong> <span id="hits">{{ hits }}</span> / <span id="total-ships">{{ total_ships }}</span></p>
-    </div>
+        <div class="scoreboard mt-3">
+            <p><strong>Attempts:</strong> <span id="attempts">{{ attempts }}</span></p>
+            <p><strong>Hits:</strong> <span id="hits">{{ hits }}</span> / <span id="total-ships">{{ total_ships }}</span></p>
+        </div>
+
+    <!-- ✅ Progress Bar for Hits -->
+        <div class="progress mt-2">
+            <div id="hit-progress" class="progress-bar bg-success" role="progressbar" 
+                style="width: 0%;" aria-valuenow="0" aria-valuemin="0" 
+                aria-valuemax="{{ total_ships }}"></div>
+            </div>
+        </div>
 
         <!-- Game Grid -->
         <div class="grid-container">
@@ -36,6 +44,7 @@
 
         <!-- Restart Button -->
         <button onclick="restartGame()" class="btn btn-custom mt-3">🔄 Restart Game</button>
+        
     </div>
 
     <!-- Bootstrap JavaScript -->
