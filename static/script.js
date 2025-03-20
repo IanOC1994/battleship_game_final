@@ -69,12 +69,14 @@ function updateScore(type, value) {
 
 // Update Progress Bar
 function updateProgressBar(hits, totalShips) {
-    if (totalShips === 0) return;  // Prevent division by zero
+    let progressBar = document.getElementById("hit-progress");
+    if (!progressBar) return;
 
     let progressPercentage = (hits / totalShips) * 100;
-    progressPercentage = Math.min(progressPercentage, 100);  // Ensure it doesn't exceed 100%
+    progressPercentage = Math.min(progressPercentage, 100);
+    
+    console.log(`Updating progress bar: ${hits}/${totalShips}`);  // Debugging
 
-    let progressBar = document.getElementById("hit-progress");
     progressBar.style.width = progressPercentage + "%";
     progressBar.setAttribute("aria-valuenow", hits);
 }
