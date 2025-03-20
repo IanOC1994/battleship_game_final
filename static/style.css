@@ -48,6 +48,13 @@ h1 {
     transform: scale(1.1);
 }
 
+/* Prevent clicking when the game ends */
+.cell.disabled {
+    pointer-events: none; /* ✅ No more clicking */
+    opacity: 0.5;         /* ✅ Show that tiles are disabled */
+    cursor: not-allowed;
+}
+
 /* Hit & Miss Effects */
 .hit {
     background-color: red !important;

@@ -1,4 +1,8 @@
+let gameEnded = false;  // Track if the game has ended
+
 function shoot(x, y) {
+    if (gameEnded) return;  // Stop the game if it's over
+
     let cell = document.getElementById(`cell-${x}-${y}`);
 
     // Prevent clicking the same cell twice
@@ -16,27 +20,23 @@ function shoot(x, y) {
     .then(data => {
         console.log("Server Response:", data);  // ✅ Debugging
 
-        if (data.hits !== undefined) {
-            console.log(`Updating hits: ${data.hits}`);  // ✅ Check if value is correct
-        }
-
-        if (data.status === "hit" || data.status === "win") {
+        if (data.status === "hit") {
             cell.innerText = "X";
             cell.classList.add("hit");
-            updateGameStatus("🔥 Hit! Keep going!");
-            updateScore("hits", data.hits);  // ✅ Ensure hits update
+            updateGameStatus("🔥 Direct Hit!");
+            updateScore("hits", data.hits);
             updateProgressBar(data.hits, data.total_ships);
-        }
 
-        if (data.status === "win") {
-            updateGameStatus(`🎉 You won in ${data.attempts} attempts!`);
-            revealShips();
-        }
-
-        if (data.status === "miss") {
+            // ✅ Check for win condition
+            if (data.hits == data.total_ships) {
+                endGame(data.attempts);
+            }
+        } else if (data.status === "miss") {
             cell.innerText = "O";
             cell.classList.add("miss");
             updateGameStatus("💦 Miss! Try again.");
+        } else if (data.status === "win") {
+            endGame(data.attempts);
         }
 
         updateScore("attempts", data.attempts);
@@ -85,6 +85,17 @@ function revealShips() {
             cell.innerText = "S";
             cell.style.backgroundColor = "green";
         });
+    });
+}
+
+function endGame(attempts) {
+    gameEnded = true;  // Prevent further clicks
+    updateGameStatus(`🎉 Victory! You won in ${attempts} attempts!`);
+
+    // Disable all cells
+    document.querySelectorAll(".cell").forEach(cell => {
+        cell.classList.add("disabled");
+        cell.onclick = null;  // Remove click events
     });
 }
 
