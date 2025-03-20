@@ -19,6 +19,12 @@
         <!-- Game Status Message -->
         <div id="game-status" class="alert alert-info">Click on a cell to fire!</div>
 
+        <!-- Scoreboard -->
+    <div class="scoreboard mt-3">
+        <p><strong>Attempts:</strong> <span id="attempts">{{ attempts }}</span></p>
+        <p><strong>Hits:</strong> <span id="hits">{{ hits }}</span> / <span id="total-ships">{{ total_ships }}</span></p>
+    </div>
+
         <!-- Game Grid -->
         <div class="grid-container">
             {% for x in range(grid|length) %}
