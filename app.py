@@ -60,24 +60,44 @@ def shoot():
         })
 
     session["attempts"] += 1
+    total_ships = sum(row.count("S") for row in session["computer_grid"])
 
     if session["computer_grid"][x][y] == 'S':
         session["game_state"][x][y] = 'X'
         session["hits"] += 1
-        session.modified = True  # ✅ Ensure session updates!
-        status = "hit"
+        session.modified = True  # ✅ Ensure session is saved
+
+        print(
+            f"✅ Flask: Hits updated to "
+            f"{session['hits']}"  # ✅ Debugging in Flask logs
+        )
+
+        # ✅ Check if all ships are hit and end the game
+        if session["hits"] == total_ships:
+            return jsonify({
+                "status": "win",
+                "attempts": session["attempts"],
+                "hits": session["hits"],
+                "total_ships": total_ships
+            })
+
+        return jsonify({
+            "status": "hit",
+            "attempts": session["attempts"],
+            "hits": session["hits"],
+            "total_ships": total_ships
+        })
+
     else:
         session["game_state"][x][y] = 'O'
-        status = "miss"
+        session.modified = True
 
-    total_ships = sum(row.count("S") for row in session["computer_grid"])
-
-    return jsonify({
-        "status": "win" if session["hits"] == total_ships else status,
-        "attempts": session["attempts"],
-        "hits": session["hits"],  # ✅ Make sure Flask returns correct hit count
-        "total_ships": total_ships
-    })
+        return jsonify({
+            "status": "miss",
+            "attempts": session["attempts"],
+            "hits": session["hits"],
+            "total_ships": total_ships
+        })
 
 
 @app.route("/reveal-ships")
