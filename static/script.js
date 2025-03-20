@@ -18,7 +18,7 @@ function shoot(x, y) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Server Response:", data);  // ✅ Debugging
+        console.log("Server Response:", data);  // Debugging
 
         if (data.status === "hit") {
             cell.innerText = "X";
@@ -27,7 +27,7 @@ function shoot(x, y) {
             updateScore("hits", data.hits);
             updateProgressBar(data.hits, data.total_ships);
 
-            // ✅ Check for win condition
+            // Check for win condition
             if (data.hits == data.total_ships) {
                 endGame(data.attempts);
             }
@@ -36,6 +36,7 @@ function shoot(x, y) {
             cell.classList.add("miss");
             updateGameStatus("💦 Miss! Try again.");
         } else if (data.status === "win") {
+            revealShips();
             endGame(data.attempts);
         }
 
@@ -93,10 +94,12 @@ function endGame(attempts) {
     updateGameStatus(`🎉 Victory! You won in ${attempts} attempts!`);
 
     // Disable all cells
-    document.querySelectorAll(".cell").forEach(cell => {
-        cell.classList.add("disabled");
-        cell.onclick = null;  // Remove click events
-    });
+    setTimeout(() => {
+        document.querySelectorAll(".cell").forEach(cell => {
+            cell.classList.add("disabled");
+            cell.onclick = null;
+        });
+    }, 500);
 }
 
 // Restart Game Function
