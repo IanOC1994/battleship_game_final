@@ -29,13 +29,15 @@ function shoot(x, y) {
 
         // Check for win condition
         if (data.hits == data.total_ships) {
-            updateScore("hits", data.hits);
-            updateProgressBar(data.hits, data.total_ships);
+            console.log(`Hits before game ends: ${data.hits}/${data.total_ships}`);  // Debugging
+        
+            updateScore("hits", data.hits);  // Ensure hit counter updates
+            updateProgressBar(data.hits, data.total_ships);  // Ensure progress bar updates
         
             setTimeout(() => {
-                revealShips(); 
-                endGame(data.attempts);
-            }, 500); 
+                revealShips();  //  Show the second ship
+                endGame(data.attempts);  // Then lock the game
+            }, 1000);  // 1 second delay ensures UI updates before game locks
         }
 
         } else if (data.status === "miss") {
