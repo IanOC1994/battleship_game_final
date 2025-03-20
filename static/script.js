@@ -58,10 +58,8 @@ function shoot(x, y) {
 function updateScore(type, value) {
     let element = document.getElementById(type);
     if (element) {
-        console.log(`Updating ${type}: ${value}`);  // ✅ Debugging
         element.innerText = value;
 
-        // ✅ Force UI refresh (fix for some browsers)
         element.style.color = "red";
         setTimeout(() => {
             element.style.color = "";
@@ -76,8 +74,6 @@ function updateProgressBar(hits, totalShips) {
 
     let progressPercentage = (hits / totalShips) * 100;
     progressPercentage = Math.min(progressPercentage, 100);
-    
-    console.log(`Updating progress bar: ${hits}/${totalShips}`);  // Debugging
 
     progressBar.style.width = progressPercentage + "%";
     progressBar.setAttribute("aria-valuenow", hits);

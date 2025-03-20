@@ -65,14 +65,9 @@ def shoot():
     if session["computer_grid"][x][y] == 'S':
         session["game_state"][x][y] = 'X'
         session["hits"] += 1
-        session.modified = True  # ✅ Ensure session is saved
+        session.modified = True  # Ensure session is saved
 
-        print(
-            f"✅ Flask: Hits updated to "
-            f"{session['hits']}"  # ✅ Debugging in Flask logs
-        )
-
-        # ✅ Check if all ships are hit and end the game
+        # Check if all ships are hit and end the game
         if session["hits"] == total_ships:
             return jsonify({
                 "status": "win",
