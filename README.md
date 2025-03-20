@@ -5,7 +5,7 @@ Battleship Game is a fun and interactive single-player web-based game where play
 The game features a **modern UI**, **real-time progress tracking**, and **a dynamic game status bar** that updates with every move.
 
 🔹 **Built With:** Python (Flask), JavaScript, HTML, CSS (Bootstrap)  
-🔹 **Live Demo:** [Play on Heroku](https://your-heroku-app.herokuapp.com/)  
+🔹 **Live Demo:** [Play on Heroku](https://battleship-game-final-68704665b3e6.herokuapp.com/)  
 
 ---
 
