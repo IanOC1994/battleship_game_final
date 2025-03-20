@@ -27,14 +27,22 @@ function shoot(x, y) {
             updateScore("hits", data.hits);
             updateProgressBar(data.hits, data.total_ships);
 
-            // Check for win condition
-            if (data.hits == data.total_ships) {
+        // Check for win condition
+        if (data.hits == data.total_ships) {
+            updateScore("hits", data.hits);
+            updateProgressBar(data.hits, data.total_ships);
+        
+            setTimeout(() => {
+                revealShips(); 
                 endGame(data.attempts);
-            }
+            }, 500); 
+        }
+
         } else if (data.status === "miss") {
             cell.innerText = "O";
             cell.classList.add("miss");
             updateGameStatus("💦 Miss! Try again.");
+
         } else if (data.status === "win") {
             revealShips();
             endGame(data.attempts);
