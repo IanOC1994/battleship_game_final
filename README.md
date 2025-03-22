@@ -10,7 +10,7 @@ The game features a **modern UI**, **real-time progress tracking**, and **a dyna
 ---
 
 ## 📸 Screenshots
-![Game Screenshot](documentation/screenshots/game-ui.png)
+![Game Screenshot][documentation/screenshots/game-ui.png]
 
 ---
 
@@ -225,3 +225,5 @@ These tools collectively power the game’s backend logic, frontend user experie
 
 - **Code Institute Community** – For continuous feedback, peer support, and shared knowledge  
 - **Mentor & Reviewers** – For invaluable guidance, constructive suggestions, and helping refine the project  
+
+[def]: do
