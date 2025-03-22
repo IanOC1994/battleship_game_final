@@ -10,7 +10,7 @@ The game features a **modern UI**, **real-time progress tracking**, and **a dyna
 ---
 
 ## 📸 Screenshots
-![Game Screenshot][documentation/screenshots/game-ui.png]
+![Game Screenshot](documentation/screenshots/game-ui.png) |
 
 ---
 
