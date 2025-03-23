@@ -68,7 +68,7 @@ function updateScore(type, value) {
 // Update Progress Bar
 function updateProgressBar(hits, totalShips) {
     let progressBar = document.getElementById("hit-progress");
-    if (!progressBar || totalShips === 0) return;
+    if (!progressBar) return;
 
     let progressPercentage = (hits / totalShips) * 100;
     progressPercentage = Math.min(progressPercentage, 100);
@@ -87,34 +87,11 @@ function revealShips() {
     fetch("/reveal-ships")
     .then(response => response.json())
     .then(data => {
-        if (data.status === "hit") {
-            cell.innerText = "X";
-            cell.classList.add("hit");
-            updateGameStatus("🔥 Direct Hit!");
-            updateScore("hits", data.hits);
-            updateProgressBar(data.hits, data.total_ships);
-   
-            // Check for win condition
-            if (data.hits == data.total_ships) {
-                updateScore("hits", data.hits);  // Ensure hit counter updates
-                updateProgressBar(data.hits, data.total_ships);  // Ensure progress bar updates
-   
-                setTimeout(() => {
-                    revealShips();  // Show the second ship
-                    endGame(data.attempts);  // Then lock the game
-                }, 1000);  // 1 second delay ensures UI updates before game locks
-            }
-   
-        } else if (data.status === "miss") {
-            cell.innerText = "O";
-            cell.classList.add("miss");
-            updateGameStatus("💦 Miss! Try again.");
-        } else if (data.status === "win") {
-            revealShips();
-            endGame(data.attempts);
-        }
-   
-        updateScore("attempts", data.attempts);
+        data.ships.forEach(([x, y]) => {
+            let cell = document.getElementById(`cell-${x}-${y}`);
+            cell.innerText = "S";
+            cell.style.backgroundColor = "green";
+        });
     });
 }
 
