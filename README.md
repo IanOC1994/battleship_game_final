@@ -10,7 +10,7 @@ The game features a **modern UI**, **real-time progress tracking**, and **a dyna
 ---
 
 ## 📸 Screenshots
-![Game Screenshot](documentation/screenshots/game-ui.png) |
+![Game Screenshot](documentation/screenshots/game-ui.png)
 
 ---
 
@@ -263,7 +263,7 @@ These tools collectively power the game’s backend logic, frontend user experie
 - [Bootstrap](https://getbootstrap.com/) – Frontend framework used for styling and responsive layout  
 - [Flask Documentation](https://flask.palletsprojects.com/) – Official reference for backend development  
 - [MDN Web Docs](https://developer.mozilla.org/) – Comprehensive reference for JavaScript, CSS, and HTML
-- [geeksforgeeks.org](https://www.geeksforgeeks.org/) -   
+- [geeksforgeeks.org](https://www.geeksforgeeks.org/) - Used for addition of 'Algorithms Used" section of README.md  
 
 ### 💬 Special Thanks
 
