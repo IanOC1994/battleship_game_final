@@ -10,7 +10,7 @@ The game features a **modern UI**, **real-time progress tracking**, and **a dyna
 ---
 
 ## 📸 Screenshots
-![Game Screenshot](documentation/screenshots/game-ui.png)
+![screenshot](documentation/screenshots/game-ui.png)
 
 ---
 
@@ -57,8 +57,8 @@ The colors used in the game are designed to provide clear visibility and engagem
 ### **🔹 Wireframes**
 | Page | Screenshot |
 |---|---|
-| Game Board (Mobile) | ![Game Mobile](documentation/wireframes/game-mobile.png) |
-| Game Board (Desktop) | ![Game Desktop](documentation/wireframes/game-desktop.png) |
+| Game Board (Mobile) | <img src="documentation/wireframes/game-mobile.png" alt="Game Mobile"/> |
+| Game Board (Desktop) | <img src="documentation/wireframes/game-desktop.png" alt="Game Desktop"/> |
 
 ---
 
