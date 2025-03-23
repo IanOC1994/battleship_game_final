@@ -79,6 +79,49 @@ The colors used in the game are designed to provide clear visibility and engagem
 
 ---
 
+## 🧠 Algorithms Used
+
+The core logic of this Battleship game is built around several simple but effective algorithms. These drive the functionality for ship placement, state tracking, user interaction, and win conditions.
+
+---
+
+### 🔹 1. Random Ship Placement
+
+**Type:** Randomization algorithm  
+**Purpose:** Placing ships randomly on the computer’s grid without overlap.
+
+### 🔹 2. Game State Tracking
+
+**Type:** Session-based state management  
+**Purpose:** Track the player's actions (hits, misses, total attempts) and the game's progression.
+
+### 🔹 3. Duplicate Move Detection
+
+**Type:** Conditional lookup  
+**Purpose:** Prevent the player from firing at the same cell more than once.
+
+### 🔹 4. Win Condition Check
+
+**Type:** Counter comparison  
+**Purpose:** Determine when the player has successfully hit all ships and won the game.
+
+### 🔹 5. Input Parsing & Validation
+
+**Type:** Input sanitization and type conversion  
+**Purpose:** Ensure that data sent from the frontend (cell coordinates) is valid and safe to use in backend logic.
+
+### 🧮 Summary of Algorithms Used
+
+| #   | Algorithm Name             | Type                     | Purpose                                             |
+|-----|----------------------------|--------------------------|-----------------------------------------------------|
+| 1   | Random Ship Placement      | Randomization            | Place ships randomly on the computer's grid         |
+| 2   | Game State Tracking        | Session-based management | Track hits, misses, and attempts across the session |
+| 3   | Duplicate Move Detection   | Conditional lookup       | Prevent firing at the same cell more than once      |
+| 4   | Win Condition Check        | Counter comparison       | Determine when all ships are hit to declare a win   |
+| 5   | Input Parsing & Validation | Input sanitization       | Ensure coordinates from frontend are valid integers |
+
+---
+
 ## 🌐 Deployment (Heroku via Heroku Dashboard)
 
 You can deploy this app to Heroku using the web interface, without needing to use the CLI.
@@ -219,11 +262,10 @@ These tools collectively power the game’s backend logic, frontend user experie
 
 - [Bootstrap](https://getbootstrap.com/) – Frontend framework used for styling and responsive layout  
 - [Flask Documentation](https://flask.palletsprojects.com/) – Official reference for backend development  
-- [MDN Web Docs](https://developer.mozilla.org/) – Comprehensive reference for JavaScript, CSS, and HTML  
+- [MDN Web Docs](https://developer.mozilla.org/) – Comprehensive reference for JavaScript, CSS, and HTML
+- [geeksforgeeks.org](https://www.geeksforgeeks.org/) -   
 
 ### 💬 Special Thanks
 
 - **Code Institute Community** – For continuous feedback, peer support, and shared knowledge  
 - **Mentor & Reviewers** – For invaluable guidance, constructive suggestions, and helping refine the project  
-
-[def]: do
