@@ -68,7 +68,7 @@ function updateScore(type, value) {
 // Update Progress Bar
 function updateProgressBar(hits, totalShips) {
     let progressBar = document.getElementById("hit-progress");
-    if (!progressBar) return;
+    if (!progressBar || totalShips === 0) return;
 
     let progressPercentage = (hits / totalShips) * 100;
     progressPercentage = Math.min(progressPercentage, 100);
