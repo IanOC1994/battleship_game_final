@@ -115,3 +115,19 @@ function restartGame() {
     fetch("/restart")
     .then(() => location.reload());
 }
+
+// Event Listeners
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".cell").forEach(cell => {
+        cell.addEventListener("click", () => {
+            const x = cell.dataset.x;
+            const y = cell.dataset.y;
+            shoot(x, y);
+        });
+    });
+
+    const restartButton = document.getElementById("restart-btn");
+    if (restartButton) {
+        restartButton.addEventListener("click", restartGame);
+    }
+});

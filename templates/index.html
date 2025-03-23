@@ -36,13 +36,13 @@
         <div class="grid-container">
             {% for x in range(grid|length) %}
                 {% for y in range(grid[x]|length) %}
-                    <div id="cell-{{ x }}-{{ y }}" class="cell" onclick="shoot('{{ x }}', '{{ y }}')">{{ grid[x][y] }}</div>
+                    <div id="cell-{{ x }}-{{ y }}" class="cell" data-x="{{ x }}" data-y="{{ y }}">{{ grid[x][y] }}</div>
                 {% endfor %}
             {% endfor %}
         </div>
 
         <!-- Restart Button -->
-        <button onclick="restartGame()" class="btn btn-custom mt-3">🔄 Restart Game</button>
+        <button id="restart-btn" class="btn btn-custom mt-3">🔄 Restart Game</button>
 
     </div>
 
