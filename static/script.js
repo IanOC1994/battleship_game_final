@@ -7,7 +7,7 @@ function shoot(x, y) {
 
     // Prevent clicking the same cell twice
     if (cell.classList.contains("hit") || cell.classList.contains("miss")) {
-        alert("You've already shot here!");
+        showNotification("You've already shot here!");
         return;
     }
 
@@ -18,7 +18,6 @@ function shoot(x, y) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Server Response:", data);  // Debugging
 
         if (data.status === "hit") {
             cell.innerText = "X";
@@ -29,7 +28,6 @@ function shoot(x, y) {
 
         // Check for win condition
         if (data.hits == data.total_ships) {
-            console.log(`Hits before game ends: ${data.hits}/${data.total_ships}`);  // Debugging
         
             updateScore("hits", data.hits);  // Ensure hit counter updates
             updateProgressBar(data.hits, data.total_ships);  // Ensure progress bar updates
@@ -114,6 +112,18 @@ function endGame(attempts) {
 function restartGame() {
     fetch("/restart")
     .then(() => location.reload());
+}
+
+// Custom Notification Function
+function showNotification(message) {
+    const notification = document.createElement("div");
+    notification.className = "notification";
+    notification.innerText = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
 }
 
 // Event Listeners
