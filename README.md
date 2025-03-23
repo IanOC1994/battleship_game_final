@@ -233,6 +233,18 @@ Refer to [`TESTING.md`](TESTING.md) for a full breakdown of test cases, results,
 
 ---
 
+## 🐞 Known Issues
+
+- When the game ends (i.e. the player hits all ships), the **status bar and hit counter do not update** to reflect the final state.
+- This issue is related to the timing of DOM updates versus disabling input in the JavaScript logic.
+- The game logic and win condition still function correctly, and the game ends as expected — but the final UI update does not appear.
+
+🛠️ **Planned Fix (if time allowed):**
+- Delay board locking by a few milliseconds after updating the UI.
+- Ensure final state is pushed to the DOM before disabling interaction.
+
+---
+
 ## 🧰 Tools & Technologies
 
 The following tools and technologies were used in the development and deployment of this project:
